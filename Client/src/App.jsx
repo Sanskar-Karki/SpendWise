@@ -1,12 +1,12 @@
-import './App.css'
+import Navbar from "./components/Navbar"
 
 function App() {
 
   return (
     <>
-
-      <h1> Expense Tracker </h1>
-
+      <div className="relative">
+        <Navbar />
+      </div>
     </>
   )
 }
