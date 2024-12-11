@@ -1,10 +1,31 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  createRoutesFromElements,
+  Route,
+} from "react-router-dom";
+import Income from "./components/Income/Income";
+import Expense from "./components/Expense/Expense";
+import Dashboard from "./components/Dashboard/Dashboard";
+import NotFound from "./NotFound";
 
-createRoot(document.getElementById('root')).render(
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<App />}>
+      <Route path="" element={<Dashboard />} /> {/* Default route */}
+      <Route path="income" element={<Income />} />
+      <Route path="expense" element={<Expense />} />
+      <Route path="*" element={<NotFound />} /> {/* Catch-all for 404 */}
+    </Route>
+  )
+);
+
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
-  </StrictMode>,
-)
+    <RouterProvider router={router} />
+  </StrictMode>
+);

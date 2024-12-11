@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -62,31 +63,33 @@ const Navbar = () => {
           <div className="flex flex-1 items-center justify-between">
             {/* Logo/Title - Left on desktop */}
             <div className="flex-shrink-0">
-              <h1 className="text-3xl text-[#DBE2EF] font-bold">SpendWise</h1>
+              <Link to="/">
+                <h1 className="text-3xl text-[#DBE2EF] font-bold">SpendWise</h1>
+              </Link>
             </div>
 
             {/* Navigation Links - Centered on desktop */}
             <div className="hidden sm:block flex-1">
               <div className="flex justify-center space-x-4">
-                <a
-                  href="#"
+                <Link
+                  to="/"
                   className="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-[#DBE2EF] hover:text-black"
                   aria-current="page"
                 >
                   Dashboard
-                </a>
-                <a
-                  href="#"
+                </Link>
+                <Link
+                  to='/income'
                   className="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-[#DBE2EF] hover:text-black"
                 >
                   Income
-                </a>
-                <a
-                  href="#"
+                </Link>
+                <Link
+                  to="/expense"
                   className="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-[#DBE2EF] hover:text-black"
                 >
                   Expense
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -111,27 +114,26 @@ const Navbar = () => {
                     aria-orientation="vertical"
                     aria-labelledby="user-menu-button"
                   >
-                    <a
-                      href="#"
+                    <Link
                       className="block px-4 py-2 text-sm text-gray-700"
                       role="menuitem"
                     >
                       Your Profile
-                    </a>
-                    <a
+                    </Link>
+                    <Link
                       href="#"
                       className="block px-4 py-2 text-sm text-gray-700"
                       role="menuitem"
                     >
                       Settings
-                    </a>
-                    <a
+                    </Link>
+                    <Link
                       href="#"
                       className="block px-4 py-2 text-sm text-gray-700"
                       role="menuitem"
                     >
                       Sign out
-                    </a>
+                    </Link>
                   </div>
                 )}
               </div>
@@ -144,24 +146,24 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="sm:hidden" id="mobile-menu">
           <div className="space-y-1 px-2 pb-3 pt-2">
-            <a
-              href="#"
+            <Link
+              to="/"
               className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-[#DBE2EF] hover:text-black"
             >
               Dashboard
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/income"
               className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-[#DBE2EF] hover:text-black"
             >
               Income
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/expense"
               className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-[#DBE2EF] hover:text-black"
             >
               Expense
-            </a>
+            </Link>
           </div>
         </div>
       )}
