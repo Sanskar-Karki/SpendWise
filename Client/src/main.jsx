@@ -16,16 +16,14 @@ import NotFound from "./NotFound";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route path="" element={<Dashboard />} /> {/* Default route */}
+      <Route index element={<Dashboard />} />
       <Route path="income" element={<Income />} />
       <Route path="expense" element={<Expense />} />
-      <Route path="*" element={<NotFound />} /> {/* Catch-all for 404 */}
+      <Route path="*" element={<NotFound />} />
     </Route>
   )
 );
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>
+  <RouterProvider router={router} />
 );
