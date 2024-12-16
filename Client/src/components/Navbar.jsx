@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const location = useLocation();  // Hook to get current location
 
   const handleNavbar = () => {
     setIsMenuOpen((prev) => !prev);
@@ -13,8 +14,15 @@ const Navbar = () => {
     setIsProfileMenuOpen((prev) => !prev);
   };
 
+  // Function to check if the current path matches the link
+  const getLinkClass = (path) => {
+    return location.pathname === path
+      ? "rounded-md px-3 py-2 text-sm font-medium text-black bg-[#DBE2EF]" // Active link styles
+      : "rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-[#DBE2EF] hover:text-black"; // Default link styles
+  };
+
   return (
-    <nav className=" bg-[#112D4E] z-10 w-full">
+    <nav className="bg-[#112D4E] z-10 w-full">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           {/* Mobile menu button - Only visible on small screens */}
@@ -73,20 +81,20 @@ const Navbar = () => {
               <div className="flex justify-center space-x-4">
                 <Link
                   to="/"
-                  className="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-[#DBE2EF] hover:text-black"
+                  className={getLinkClass("/")}
                   aria-current="page"
                 >
                   Dashboard
                 </Link>
                 <Link
-                  to='/income'
-                  className="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-[#DBE2EF] hover:text-black"
+                  to="/income"
+                  className={getLinkClass("/income")}
                 >
                   Income
                 </Link>
                 <Link
                   to="/expense"
-                  className="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-[#DBE2EF] hover:text-black"
+                  className={getLinkClass("/expense")}
                 >
                   Expense
                 </Link>
