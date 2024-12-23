@@ -5,8 +5,10 @@ function App() {
 
   return (
     <>
-      <Navbar />
-      <Outlet />
+      <div className="bg-gradient-to-br from-blue-900 via-purple-100 to-slate-400">
+        <Navbar />
+        <Outlet />
+      </div>
     </>
   )
 }
