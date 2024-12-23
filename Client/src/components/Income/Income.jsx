@@ -1,87 +1,99 @@
-import { useState } from "react"
-import IncomeList from "./IncomeList"
+import { useState } from "react";
+import IncomeList from "./IncomeList";
 
 const Income = () => {
-
-  const [incomeData, setIncomeData] = useState([])
+  const [incomeData, setIncomeData] = useState([]);
   const [data, setData] = useState({
     remark: "",
     amount: "",
     date: "",
-  })
+  });
 
   const handleInput = (e) => {
-    const { value, name } = e.target
-    setData({
-      ...data,
-      [name]: value
-    })
-  }
+    const { value, name } = e.target;
+    setData({ ...data, [name]: value });
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    if (data.remark.trim() !== "" && data.amount.trim() !== "" && data.date.trim() !== "") {
-      setIncomeData([...incomeData, data])
-      setData({
-        remark: "",
-        amount: "",
-        date: "",
-      });
+    e.preventDefault();
+    if (data.remark.trim() && data.amount.trim() && data.date.trim()) {
+      setIncomeData([...incomeData, data]);
+      setData({ remark: "", amount: "", date: "" });
     } else {
-      alert("Give all the inputs")
+      alert("Please fill all fields");
     }
-  }
+  };
 
   const deleteHandler = (index) => {
-    const filteredData = incomeData.filter((_, i) => i !== index)
-    setIncomeData(filteredData)
-  }
-
-  console.log(incomeData)
-  console.log(data)
+    const filteredData = incomeData.filter((_, i) => i !== index);
+    setIncomeData(filteredData);
+  };
 
   return (
-    <div className="mx-40 my-10">
-      <div >
-        <form className="flex mb-8 min-w-full m-5" onSubmit={handleSubmit}>
-          <label className=" text-gray-700 text-sm font-bold mb-2 ">
-            Enter Text :
-            <input
-              name="remark"
-              value={data.remark}
-              className="border border-gray-500 ml-2 rounded w-1/2 py-2 px-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Enter text"
-              type="text"
-              onChange={handleInput}
-            />
-          </label>
+    <div className="min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="backdrop-blur-lg bg-white/30 rounded-3xl shadow-xl p-8 border border-white/50">
+          <h2 className="text-3xl font-bold text-gray-800/90 mb-8">Add New Income</h2>
+          <form onSubmit={handleSubmit} className="space-y-8">
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-700/90">Description</label>
+                <input
+                  name="remark"
+                  value={data.remark}
+                  onChange={handleInput}
+                  className="w-full px-4 py-3 rounded-xl backdrop-blur-sm bg-white/40 border border-white/60 
+                           focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition-all duration-300
+                           placeholder-gray-400"
+                  placeholder="What is this income for?"
+                  type="text"
+                />
+              </div>
 
-          <label className=" text-gray-700 text-sm font-bold mb-2">
-            Enter Amount :
-            <input
-              name="amount"
-              value={data.amount}
-              onChange={handleInput}
-              className="border border-gray-500 rounded w-1/2 py-2 ml-2 px-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Enter amount"
-              type="number"
-            />
-          </label >
-          <label className=" text-gray-700 text-sm font-bold mb-2">
-            Select Date :
-            <input value={data.date} onChange={handleInput} name="date" className="border border-gray-500 rounded w-1/3 py-2 px-3 ml-2 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              type="datetime-local" />
-          </label>
-          <button className="border border-blue-500 rounded-xl px-5 text-sm  hover:bg-[#295383] hover:text-white hover:shadow-lg transition-all duration-500 ">
-            Add Income
-          </button>
-        </form>
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-700/90">Amount</label>
+                <input
+                  name="amount"
+                  value={data.amount}
+                  onChange={handleInput}
+                  className="w-full px-4 py-3 rounded-xl backdrop-blur-sm bg-white/40 border border-white/60 
+                           focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition-all duration-300
+                           placeholder-gray-400"
+                  placeholder="0.00"
+                  type="number"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-700/90">Date</label>
+                <input
+                  value={data.date}
+                  onChange={handleInput}
+                  name="date"
+                  className="w-full px-4 py-3 rounded-xl backdrop-blur-sm bg-white/40 border border-white/60 
+                           focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition-all duration-300"
+                  type="datetime-local"
+                />
+              </div>
+            </div>
+
+            <div className="flex justify-end">
+              <button className="inline-flex w-full flex justify-center sm:w-auto items-center px-8 py-3 backdrop-blur-sm bg-green-600/80 hover:bg-green-700/90 
+                              text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-medium
+                              border border-white/20">
+                <div className="w-5 h-5 mr-2 " />
+                Add Income
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div className="mt-8">
+          <IncomeList incomeData={incomeData} deleteHandler={deleteHandler} />
+        </div>
       </div>
-
-      <IncomeList incomeData={incomeData} deleteHandler={deleteHandler} />
     </div>
+  );
+};
 
-  )
-}
-
-export default Income
+export default Income;

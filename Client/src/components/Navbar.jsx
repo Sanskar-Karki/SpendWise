@@ -22,7 +22,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-[#112D4E] z-10 w-full">
+    <nav className="bg-[#193e6a] z-10 w-full  p-3">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           {/* Mobile menu button - Only visible on small screens */}
