@@ -11,21 +11,14 @@ const Income = () => {
 
   const handleInput = (e) => {
     const { value, name } = e.target;
-    setData({
-      ...data,
-      [name]: value,
-    });
+    setData({ ...data, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (data.remark.trim() !== "" && data.amount.trim() !== "" && data.date.trim() !== "") {
+    if (data.remark.trim() && data.amount.trim() && data.date.trim()) {
       setIncomeData([...incomeData, data]);
-      setData({
-        remark: "",
-        amount: "",
-        date: "",
-      });
+      setData({ remark: "", amount: "", date: "" });
     } else {
       alert("Please fill all fields");
     }
@@ -37,66 +30,68 @@ const Income = () => {
   };
 
   return (
-    <div className="mx-4 md:mx-8 lg:mx-40 my-6 md:my-10">
-      <div className="w-full max-w-4xl mx-auto">
-        <form
-          className="flex flex-col md:flex-row gap-4 mb-8 p-4 bg-white rounded-lg shadow-sm"
-          onSubmit={handleSubmit}
-        >
-          <div className="flex-1">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Enter Text:
-              <input
-                name="remark"
-                value={data.remark}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm 
-                         focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Enter text"
-                type="text"
-                onChange={handleInput}
-              />
-            </label>
-          </div>
+    <div className="min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="backdrop-blur-lg bg-white/30 rounded-3xl shadow-xl p-8 border border-white/50">
+          <h2 className="text-3xl font-bold text-gray-800/90 mb-8">Add New Income</h2>
+          <form onSubmit={handleSubmit} className="space-y-8">
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-700/90">Description</label>
+                <input
+                  name="remark"
+                  value={data.remark}
+                  onChange={handleInput}
+                  className="w-full px-4 py-3 rounded-xl backdrop-blur-sm bg-white/40 border border-white/60 
+                           focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition-all duration-300
+                           placeholder-gray-400"
+                  placeholder="What is this income for?"
+                  type="text"
+                />
+              </div>
 
-          <div className="flex-1">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Enter Amount:
-              <input
-                name="amount"
-                value={data.amount}
-                onChange={handleInput}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm 
-                         focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Enter amount"
-                type="number"
-              />
-            </label>
-          </div>
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-700/90">Amount</label>
+                <input
+                  name="amount"
+                  value={data.amount}
+                  onChange={handleInput}
+                  className="w-full px-4 py-3 rounded-xl backdrop-blur-sm bg-white/40 border border-white/60 
+                           focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition-all duration-300
+                           placeholder-gray-400"
+                  placeholder="0.00"
+                  type="number"
+                />
+              </div>
 
-          <div className="flex-1">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Select Date:
-              <input
-                value={data.date}
-                onChange={handleInput}
-                name="date"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm 
-                         focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                type="datetime-local"
-              />
-            </label>
-          </div>
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-700/90">Date</label>
+                <input
+                  value={data.date}
+                  onChange={handleInput}
+                  name="date"
+                  className="w-full px-4 py-3 rounded-xl backdrop-blur-sm bg-white/40 border border-white/60 
+                           focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition-all duration-300"
+                  type="datetime-local"
+                />
+              </div>
+            </div>
 
-          <button
-            className="w-full md:w-auto mt-4 md:mt-8 px-6 py-2 bg-blue-600 text-white rounded-md
-                     hover:bg-blue-700 transition-colors duration-200"
-          >
-            Add Income
-          </button>
-        </form>
+            <div className="flex justify-end">
+              <button className="inline-flex w-full flex justify-center sm:w-auto items-center px-8 py-3 backdrop-blur-sm bg-green-600/80 hover:bg-green-700/90 
+                              text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-medium
+                              border border-white/20">
+                <div className="w-5 h-5 mr-2 " />
+                Add Income
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div className="mt-8">
+          <IncomeList incomeData={incomeData} deleteHandler={deleteHandler} />
+        </div>
       </div>
-
-      <IncomeList incomeData={incomeData} deleteHandler={deleteHandler} />
     </div>
   );
 };
