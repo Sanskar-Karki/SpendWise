@@ -7,16 +7,6 @@ const Expense = sequelize.define(Table, {
     primaryKey: true,
     autoIncrement: true,
   },
-  category: {
-    type: DataTypes.ENUM(
-      "Food",
-      "Travel",
-      "Utilities",
-      "Entertainment",
-      "Other"
-    ),
-    allowNull: false,
-  },
   description: {
     type: DataTypes.STRING,
     allowNull: false,
