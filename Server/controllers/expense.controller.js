@@ -11,7 +11,7 @@ const { parse } = require("json2csv");
 const sequelize = require("../connection/dbConnection");
 
 const addExpense = asyncHandler(async (req, res, next) => {
-  const { category, description, amount, createdAt, updatedAt } = req.body;
+  const { description, amount, createdAt, updatedAt } = req.body;
   const userId = req.user.id;
   try {
     const formattedDate = formatDate(createdAt);
@@ -32,7 +32,6 @@ const addExpense = asyncHandler(async (req, res, next) => {
     });
     const newTotal = totalExpensesOfMonth + parseFloat(amount);
     const expense = await Expense.create({
-      category,
       description,
       amount,
       createdAt: formattedDate,
@@ -75,10 +74,9 @@ const updateExpense = asyncHandler(async (req, res, next) => {
   if (expense.userId !== req.user.id) {
     throw new ApiError(404, "You Can Update Only Your Expenses");
   }
-  const { category, amount, description, createdAt } = req.body;
+  const { amount, description, createdAt } = req.body;
   const updatedData = await Expense.update(
     {
-      category,
       amount,
       description,
       createdAt,
@@ -112,7 +110,6 @@ const getAllExpenses = asyncHandler(async (req, res, next) => {
   const expenses = await Expense.findAll({
     where: { userId },
     attributes: [
-      "category",
       "description",
       "amount",
       [sequelize.col("createdAt"), "ExpenseDate"],
@@ -149,28 +146,6 @@ const getExpenseSummary = asyncHandler(async (req, res, next) => {
     totalAmount,
   };
   res.json(new ApiResponse(200, summary, "Your Expense Summary"));
-});
-
-const filterByCategory = asyncHandler(async (req, res, next) => {
-  const { category } = req.params;
-  const expenses = await Expense.findAll({
-    where: {
-      userId: req.user.id,
-      category,
-    },
-    attributes: ["description", "amount"],
-  });
-  const description = expenses.map((expense) => expense.description);
-  const totalAmount = expenses.reduce(
-    (acc, expense) => acc + parseFloat(expense.amount),
-    0
-  );
-  const summary = {
-    totalExpenses: expenses.length,
-    description,
-    totalAmount,
-  };
-  res.json(new ApiResponse(200, summary, `Expenses for category: ${category}`));
 });
 
 // Helper function to convert month name to month number for expenseOfMonth function
@@ -215,12 +190,7 @@ const expenseOfMonth = asyncHandler(async (req, res, next) => {
           [Op.between]: [startOfMonth, endOfMonth],
         },
       },
-      attributes: [
-        "category",
-        "description",
-        "amount",
-        ["createdAt", "ExpenseDate"],
-      ],
+      attributes: ["description", "amount", ["createdAt", "ExpenseDate"]],
     });
     const ExpenditureOfMonth = expenses.reduce(
       (acc, expense) => acc + parseFloat(expense.amount),
@@ -258,12 +228,7 @@ const exportToCSV = asyncHandler(async (req, res, next) => {
   try {
     const expenses = await Expense.findAll({
       where: { userId },
-      attributes: [
-        "category",
-        "description",
-        "amount",
-        ["createdAt", "ExpenseDate"],
-      ],
+      attributes: ["description", "amount", ["createdAt", "ExpenseDate"]],
     });
     const expensesJSON = expenses.map(serializeExpense);
     const csv = parse(expensesJSON, { header: true });
@@ -283,7 +248,6 @@ module.exports = {
   deleteExpense,
   getAllExpenses,
   getExpenseSummary,
-  filterByCategory,
   expenseOfMonth,
   exportToCSV,
 };
