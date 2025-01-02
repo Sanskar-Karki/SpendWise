@@ -10,7 +10,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard--parent ">
       <div className="dashboard--chart">
-        <Chart />
+        <Chart/>
       </div>
       <div className="dashboard--income--expense">
         <div className="latest--income">
