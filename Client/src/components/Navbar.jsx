@@ -17,13 +17,17 @@ const Navbar = () => {
   // Function to check if the current path matches the link
   const getLinkClass = (path) => {
     return location.pathname === path
-      ? "rounded-md px-3 py-2 text-sm font-medium text-black bg-[#DBE2EF]" // Active link styles
-      : "rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-[#DBE2EF] hover:text-black"; // Default link styles
+      ? "rounded-md px-3 py-2 text-sm font-medium text-black bg-purple-100 transition-all duration-500 transform hover:scale-105" // Active link styles with smooth transition
+      : "rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-purple-200 hover:text-black transition-all duration-500 transform hover:scale-105 "; // Default link styles with hover effects and focus styling
   };
 
+
+
+
+
   return (
-    <nav className="bg-[#193e6a] z-10 w-full  p-3">
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <nav className="sticky top-0 left-0 w-full z-50 backdrop-blur-sm  shadow-lg">
+      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 ">
         <div className="relative flex h-16 items-center justify-between">
           {/* Mobile menu button - Only visible on small screens */}
           <div className="flex items-center sm:hidden">
@@ -72,32 +76,33 @@ const Navbar = () => {
             {/* Logo/Title - Left on desktop */}
             <div className="flex-shrink-0">
               <Link to="/">
-                <h1 className="text-3xl text-[#DBE2EF] font-bold">SpendWise</h1>
+                <h1 className="text-3xl text-[#0d1014] font-bold">SpendWise</h1>
               </Link>
             </div>
 
             {/* Navigation Links - Centered on desktop */}
             <div className="hidden sm:block flex-1">
-              <div className="flex justify-center space-x-4">
+              <div className="flex  justify-center space-x-4">
                 <Link
                   to="/"
-                  className={getLinkClass("/")}
+                  className={`rounded-md px-3 py-2 text-sm font-medium sm:text-black ${getLinkClass("/")}`}
                   aria-current="page"
                 >
                   Dashboard
                 </Link>
                 <Link
                   to="/income"
-                  className={getLinkClass("/income")}
+                  className={`rounded-md px-3 py-2 text-sm font-medium sm:text-black ${getLinkClass("/income")}`}
                 >
                   Income
                 </Link>
                 <Link
                   to="/expense"
-                  className={getLinkClass("/expense")}
+                  className={`rounded-md px-3 py-2 text-sm font-medium sm:text-black ${getLinkClass("/expense")}`}
                 >
                   Expense
                 </Link>
+
               </div>
             </div>
 
@@ -156,19 +161,19 @@ const Navbar = () => {
           <div className="space-y-1 px-2 pb-3 pt-2">
             <Link
               to="/"
-              className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-[#DBE2EF] hover:text-black"
+              className="block rounded-md px-3 py-2 text-base font-medium text-black hover:bg-[#DBE2EF] hover:text-black"
             >
               Dashboard
             </Link>
             <Link
               to="/income"
-              className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-[#DBE2EF] hover:text-black"
+              className="block rounded-md px-3 py-2 text-base font-medium text-black hover:bg-[#DBE2EF] hover:text-black"
             >
               Income
             </Link>
             <Link
               to="/expense"
-              className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-[#DBE2EF] hover:text-black"
+              className="block rounded-md px-3 py-2 text-base font-medium text-black hover:bg-[#DBE2EF] hover:text-black"
             >
               Expense
             </Link>

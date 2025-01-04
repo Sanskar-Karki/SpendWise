@@ -2,7 +2,23 @@ import { useState } from "react";
 import IncomeList from "./IncomeList";
 
 const Income = () => {
-  const [incomeData, setIncomeData] = useState([]);
+  const [incomeData, setIncomeData] = useState([
+    {
+      remark: "Lotery",
+      amount: "1000",
+      date: "Jan 10, 2025, 09:24 PM",
+    },
+    {
+      remark: "Lotery",
+      amount: "1000",
+      date: "Jan 10, 2025, 09:24 PM",
+    },
+    {
+      remark: "Lotery",
+      amount: "1000",
+      date: "Jan 10, 2025, 09:24 PM",
+    }
+  ]);
   const [data, setData] = useState({
     remark: "",
     amount: "",
