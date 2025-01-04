@@ -17,7 +17,6 @@
 .dashboard--summary,
 .dashboard--income--expense,
 .dashboard--motivation {
-  border: 1px solid red;
 }
 
 .dashboard--income--expense {
