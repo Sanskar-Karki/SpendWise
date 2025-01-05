@@ -1,0 +1,8 @@
+.my-progress-bar-delete {
+  background: red !important; /* Set the progress bar color to red */
+  height: 5px; /* Increase the height for better visibility */
+}
+.my-progress-bar-edit {
+  background: green !important; /* Set the progress bar color to red */
+  height: 5px;
+}

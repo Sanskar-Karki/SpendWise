@@ -1,7 +1,7 @@
 import { FaEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 
-const IncomeList = ({ incomeData, deleteHandler }) => {
+const IncomeList = ({ incomeData, deleteHandler, editHandler }) => {
   return (
     <div className="w-full overflow-x-auto px-4 md:px-0">
       <div className="min-w-full shadow-md rounded-lg border border-white/30 backdrop-blur-md bg-white/20">
@@ -61,6 +61,7 @@ const IncomeList = ({ incomeData, deleteHandler }) => {
                         className="p-2 rounded-full text-blue-600 hover:bg-blue-100 transition"
                         aria-label="Edit"
                         title="Edit"
+                        onClick={() => editHandler(index)}
                       >
                         <FaEdit className="w-5 h-5" />
                       </button>
