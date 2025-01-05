@@ -1,0 +1,37 @@
+.my-progress-bar-delete {
+  background: green !important;
+  height: 10px;
+}
+
+.my-progress-bar-edit {
+  background: green !important;
+  height: 5px;
+}
+
+.my-swal-popup {
+  border-radius: 10px !important;
+}
+
+.btn-red {
+  background-color: #e3342f !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 10px 20px !important;
+}
+
+.btn-red:hover {
+  background-color: #cc1f1a !important;
+}
+
+.btn-green {
+  background-color: #38c172 !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 10px 20px !important;
+}
+
+.btn-green:hover {
+  background-color: #2f9f65 !important;
+}
