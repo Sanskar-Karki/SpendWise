@@ -1,26 +1,15 @@
+// src/Income.js
 import { useState } from "react";
-import IncomeList from "./IncomeList";
+import { useDispatch, useSelector } from "react-redux";
+import { addIncome, updateIncome, deleteIncome } from "../../features/income/incomeSlice.js";
 import Swal from "sweetalert2";
+import IncomeList from "./IncomeList";
+import { motion } from "framer-motion";  // Import framer-motion
 import "./Income.css";
 
 const Income = () => {
-  const [incomeData, setIncomeData] = useState([
-    {
-      remark: "Lottery",
-      amount: "9999",
-      date: "Jan 10, 2025, 09:24 PM",
-    },
-    {
-      remark: "Lottery",
-      amount: "1000000",
-      date: "Jan 10, 2025, 09:24 PM",
-    },
-    {
-      remark: "Lottery",
-      amount: "1000",
-      date: "Jan 10, 2025, 09:24 PM",
-    },
-  ]);
+  const dispatch = useDispatch();
+  const incomeData = useSelector((state) => state.income.incomeData);
   const [data, setData] = useState({
     remark: "",
     amount: "",
@@ -39,9 +28,7 @@ const Income = () => {
 
     if (data.remark.trim() && data.amount.trim() && data.date.trim()) {
       if (editIndex !== null) {
-        const updatedData = [...incomeData];
-        updatedData[editIndex] = data;
-        setIncomeData(updatedData);
+        dispatch(updateIncome({ index: editIndex, newData: data }));
         Swal.fire({
           title: "Edit Successful!",
           icon: "success",
@@ -53,12 +40,12 @@ const Income = () => {
             popup: 'my-swal-popup',
             timerProgressBar: 'my-progress-bar-edit',
           },
-          toast: true
+          toast: true,
         });
         setEditIndex(null);
         setIsDateEditable(true);
       } else {
-        setIncomeData([...incomeData, data]);
+        dispatch(addIncome(data));
         Swal.fire({
           title: "Income Added Successfully!",
           icon: "success",
@@ -161,10 +148,9 @@ const Income = () => {
           toast: true,
           iconColor: "#b91c1c",
         });
-        const filteredData = incomeData.filter((_, i) => i !== index);
-        setIncomeData(filteredData);
+        dispatch(deleteIncome({ index }));
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        return
+        return;
       }
     });
   };
@@ -172,7 +158,14 @@ const Income = () => {
   return (
     <div className="min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="backdrop-blur-lg bg-white/30 rounded-3xl shadow-xl p-8 border border-white/50">
+        {/* Add animation to the form */}
+        <motion.div
+          className="backdrop-blur-lg bg-gradient-to-tr from-white/40 via-white/30 to-white/10 rounded-3xl shadow-2xl p-8 border border-white/50 hover:shadow-3xl transition-shadow duration-500"
+          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          whileHover={{ scale: 1.02, boxShadow: "-10px 10px 200px rgba(50, 205, 50, 0.4)" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <h2 className="text-3xl font-bold text-gray-800/90 mb-8">
             {editIndex !== null ? "Edit Income" : "Add New Income"}
           </h2>
@@ -233,17 +226,22 @@ const Income = () => {
                 </button>
               )}
 
-              <button className="inline-flex w-full sm:w-auto justify-center items-center px-8 py-3 backdrop-blur-sm bg-green-600/80 hover:bg-green-700/90 
-                              text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-medium
-                              border border-white/20">
+              <button className="px-8 py-4 sm:px-12 sm:py-5 text-xs  sm:rounded-xl sm:text-sm uppercase font-semibold text-white bg-green-600 border-none rounded-2xl 
+            shadow-md transition-all duration-300 ease-in-out cursor-pointer outline-none 
+            hover:bg-green-500 hover:shadow-lg hover:text-white hover:translate-y-[-4px]
+            active:translate-y-[-1px] w-full sm:w-auto">
                 {editIndex !== null ? "Update Income" : "Add Income"}
               </button>
             </div>
           </form>
-        </div>
+        </motion.div>
 
         <div className="mt-8">
-          <IncomeList incomeData={incomeData} editHandler={editHandler} deleteHandler={deleteHandler} />
+          <IncomeList
+            incomeData={incomeData}
+            deleteHandler={deleteHandler}
+            editHandler={editHandler}
+          />
         </div>
       </div>
     </div>

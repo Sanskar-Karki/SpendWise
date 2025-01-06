@@ -1,12 +1,13 @@
 import { FaEdit, FaSort, FaSortUp, FaSortDown } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { useState } from "react";
+import "animate.css";
 
 const ExpenseList = ({ expenseData, deleteHandler, editHandler }) => {
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
 
   const sortedData = [...expenseData].sort((a, b) => {
-    if (!sortConfig.key) return 0; // If no sorting key, return original data
+    if (!sortConfig.key) return 0; // If no sorting key, return the original data
 
     const order = sortConfig.direction === "asc" ? 1 : -1;
     if (sortConfig.key === "amount") {
@@ -18,6 +19,7 @@ const ExpenseList = ({ expenseData, deleteHandler, editHandler }) => {
     return 0;
   });
 
+  // Handle sorting logic for each column
   const handleSort = (key) => {
     setSortConfig((prev) => {
       const newDirection = prev.key === key && prev.direction === "asc" ? "desc" : "asc";
@@ -25,6 +27,7 @@ const ExpenseList = ({ expenseData, deleteHandler, editHandler }) => {
     });
   };
 
+  // Sorting icon based on current sorting state
   const getSortIcon = (key) => {
     if (sortConfig.key !== key) return <FaSort className="w-4 h-4" />;
     return sortConfig.direction === "asc" ? (
@@ -35,7 +38,7 @@ const ExpenseList = ({ expenseData, deleteHandler, editHandler }) => {
   };
 
   return (
-    <div className="w-full overflow-x-auto px-4 md:px-0">
+    <div className="w-full px-4 md:px-0 overflow-hidden">
       <div className="min-w-full shadow-md rounded-lg border border-white/30 backdrop-blur-md bg-white/20">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-white/40 backdrop-blur-sm">
@@ -80,7 +83,7 @@ const ExpenseList = ({ expenseData, deleteHandler, editHandler }) => {
               sortedData.map((data, index) => (
                 <tr
                   key={index}
-                  className="hover:bg-white/30 transition duration-200 ease-in-out"
+                  className="hover:bg-white/30 transition duration-200 ease-in-out animate__animated animate__fadeInUp"
                 >
                   <td className="px-4 py-4 text-sm md:text-base text-gray-900 break-words max-w-xs">
                     <div className="flex flex-col">
@@ -105,7 +108,7 @@ const ExpenseList = ({ expenseData, deleteHandler, editHandler }) => {
                   <td className="px-4 py-4 text-sm">
                     <div className="flex items-center space-x-3">
                       <button
-                        className="p-2 rounded-full text-blue-600 hover:bg-blue-100 transition"
+                        className="p-2 rounded-full text-blue-600 hover:bg-blue-300 transition"
                         aria-label="Edit"
                         title="Edit"
                         onClick={() => editHandler(index)}
@@ -113,8 +116,8 @@ const ExpenseList = ({ expenseData, deleteHandler, editHandler }) => {
                         <FaEdit className="w-5 h-5" />
                       </button>
                       <button
-                        onClick={() => deleteHandler(index)}
-                        className="p-2 rounded-full text-red-600 hover:bg-red-100 transition"
+                        onClick={() => deleteHandler(index)} // Directly call delete handler
+                        className="p-2 rounded-full text-red-600 hover:bg-red-300 transition"
                         aria-label="Delete"
                         title="Delete"
                       >

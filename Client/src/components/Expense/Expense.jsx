@@ -1,26 +1,15 @@
+// src/Expense.js
+import { useDispatch, useSelector } from "react-redux";
+import { addExpense, updateExpense, deleteExpense } from "../../features/expense/expenseSlice"; // Adjust the import path accordingly
+import Swal from "sweetalert2";
 import { useState } from "react";
 import ExpenseList from "./ExpenseList";
-import Swal from "sweetalert2";
+import { motion } from "framer-motion";  // Import framer-motion for animation
 import "./Expense.css";
 
 const Expense = () => {
-  const [expenseData, setExpenseData] = useState([
-    {
-      remark: "asdfasdf",
-      amount: "100",
-      date: "Oct 20, 2005, 2:44 AM",
-    },
-    {
-      remark: "Lotfddfasdtery",
-      amount: "10000",
-      date: "Jan 22, 2020, 09:24 PM",
-    },
-    {
-      remark: "Lofasdfttery",
-      amount: "1000",
-      date: "Feb 29, 2022, 01:24 PM",
-    },
-  ]);
+  const dispatch = useDispatch();
+  const expenseData = useSelector((state) => state.expense.expenseData);
   const [data, setData] = useState({
     remark: "",
     amount: "",
@@ -39,9 +28,8 @@ const Expense = () => {
 
     if (data.remark.trim() && data.amount.trim() && data.date.trim()) {
       if (editIndex !== null) {
-        const updatedData = [...expenseData];
-        updatedData[editIndex] = data;
-        setExpenseData(updatedData);
+        // Update existing expense
+        dispatch(updateExpense({ index: editIndex, newData: data }));
         Swal.fire({
           title: "Edit Successful!",
           icon: "success",
@@ -53,12 +41,13 @@ const Expense = () => {
             popup: 'my-swal-popup',
             timerProgressBar: 'my-progress-bar-edit',
           },
-          toast: true
+          toast: true,
         });
         setEditIndex(null);
         setIsDateEditable(true);
       } else {
-        setExpenseData([...expenseData, data]);
+        // Add new expense
+        dispatch(addExpense(data));
         Swal.fire({
           title: "Expense Added Successfully!",
           icon: "success",
@@ -67,13 +56,13 @@ const Expense = () => {
           timer: 2000,
           color: "#34d399",
           timerProgressBar: true,
+          showConfirmButton: false,
           customClass: {
             popup: "w-80 sm:w-96 md:w-1/3 border-2 border-green-300 rounded-lg shadow-xl p-6",
             confirmButton: "bg-green-500 text-white px-6 py-3 rounded-xl hover:bg-green-600 transition-all duration-300",
             timerProgressBar: 'my-progress-bar-edit',
             title: "font-semibold text-lg md:text-xl text-center text-green-700"
           },
-          showConfirmButton: false,
           backdrop: false,
           toast: true,
         });
@@ -93,6 +82,7 @@ const Expense = () => {
           confirmButton: "bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700",
         },
         buttonsStyling: false,
+        toast: true,
       });
     }
   };
@@ -146,6 +136,7 @@ const Expense = () => {
       },
     }).then((result) => {
       if (result.isConfirmed) {
+        dispatch(deleteExpense({ index }));
         Swal.fire({
           title: "Deletion Successful",
           icon: "success",
@@ -161,10 +152,6 @@ const Expense = () => {
           toast: true,
           iconColor: "#b91c1c",
         });
-        const filteredData = expenseData.filter((_, i) => i !== index);
-        setExpenseData(filteredData);
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        return;
       }
     });
   };
@@ -172,7 +159,14 @@ const Expense = () => {
   return (
     <div className="min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="backdrop-blur-lg bg-white/30 rounded-3xl shadow-xl p-8 border border-white/50">
+        {/* Animate the form with motion.div */}
+        <motion.div
+          className="backdrop-blur-lg bg-gradient-to-tr from-white/40 via-white/30 to-white/10 rounded-3xl shadow-2xl p-8 border border-white/50 hover:shadow-3xl transition-shadow duration-500"
+          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          whileHover={{ scale: 1.02, boxShadow: "-10px 10px 100px rgba(255, 50, 50, 0.3)" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <h2 className="text-3xl font-bold text-gray-800/90 mb-8">
             {editIndex !== null ? "Edit Expense" : "Add New Expense"}
           </h2>
@@ -225,22 +219,32 @@ const Expense = () => {
                 <button
                   type="button"
                   onClick={cancelEdit}
-                  className="inline-flex w-full sm:w-auto justify-center items-center px-8 py-3 backdrop-blur-sm bg-red-600/80 hover:bg-red-700/90 
-                              text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-medium
-                              border border-white/20"
+
+                  className="px-8 py-4 sm:px-12 sm:py-5 text-xs  sm:rounded-xl sm:text-sm uppercase font-semibold text-white bg-green-600 /80 hover:bg-green-700/90  border-none rounded-2xl
+              shadow-md transition-all duration-300 ease-in-out cursor-pointer outline-none
+              hover:shadow-lg hover:text-white hover:translate-y-[-4px]
+              active:translate-y-[-1px] w-full sm:w-auto"
                 >
                   Cancel Update
                 </button>
               )}
 
-              <button className="inline-flex w-full sm:w-auto justify-center items-center px-8 py-3 backdrop-blur-sm bg-green-600/80 hover:bg-green-700/90 
-                              text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-medium
-                              border border-white/20">
+              <button
+                className="px-8 py-4 sm:px-12 sm:py-5 text-xs  sm:rounded-xl sm:text-sm uppercase font-semibold text-white bg-red-600 border-none rounded-2xl 
+            shadow-md transition-all duration-300 ease-in-out cursor-pointer outline-none 
+            hover:bg-red-500 hover:shadow-lg hover:text-white hover:translate-y-[-4px]
+            active:translate-y-[-1px] w-full sm:w-auto"
+              >
+
                 {editIndex !== null ? "Update Expense" : "Add Expense"}
               </button>
+
+
+
+
             </div>
           </form>
-        </div>
+        </motion.div>
 
         <div className="mt-8">
           <ExpenseList

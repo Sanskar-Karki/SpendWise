@@ -4,7 +4,7 @@
   min-height: 100vh;
   max-width: 100vw;
   grid-template-columns: 2fr 1fr;
-  grid-template-rows: 2fr 1fr;
+  grid-template-rows: 3fr 1fr;
   grid-template-areas:
     "chart income-expense"
     "summary motivation";
@@ -27,8 +27,6 @@
 }
 
 .dashboard--income--expense > div {
-  border: 1px solid red;
-  border-radius: 20px;
   margin: 10px;
 }
 
@@ -58,6 +56,23 @@
       "income-expense"
       "motivation";
   }
+}
+@keyframes glowPulse {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.glow-fade {
+  animation: glowPulse 4s infinite;
 }
 
 @media (max-width: 480px) {

@@ -1,6 +1,7 @@
 import { FaEdit, FaSort, FaSortUp, FaSortDown } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { useState } from "react";
+import "animate.css";
 
 const IncomeList = ({ incomeData, deleteHandler, editHandler }) => {
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
@@ -37,7 +38,7 @@ const IncomeList = ({ incomeData, deleteHandler, editHandler }) => {
   };
 
   return (
-    <div className="w-full overflow-x-auto px-4 md:px-0">
+    <div className="w-full px-4 md:px-0 overflow-hidden">
       <div className="min-w-full shadow-md rounded-lg border border-white/30 backdrop-blur-md bg-white/20">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-white/40 backdrop-blur-sm">
@@ -82,7 +83,7 @@ const IncomeList = ({ incomeData, deleteHandler, editHandler }) => {
               sortedData.map((data, index) => (
                 <tr
                   key={index}
-                  className="hover:bg-white/30 transition duration-200 ease-in-out"
+                  className="hover:bg-white/30 transition duration-200 ease-in-out animate__animated animate__fadeInUp"
                 >
                   <td className="px-4 py-4 text-sm md:text-base text-gray-900 break-words max-w-xs">
                     <div className="flex flex-col">
