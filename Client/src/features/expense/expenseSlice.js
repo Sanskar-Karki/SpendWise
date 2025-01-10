@@ -5,18 +5,28 @@ const initialState = {
   expenseData: [
     {
       remark: "asdfasdf",
-      amount: "100",
-      date: "Oct 20, 2005, 2:44 AM",
+      amount: "200",
+      date: "Oct 20, 2025, 2:44 AM",
+    },
+    {
+      remark: "ad",
+      amount: "400",
+      date: "Dec 20, 2025, 2:44 AM",
+    },
+    {
+      remark: "aqwe",
+      amount: "300",
+      date: "Apr 20, 2025, 2:44 AM",
     },
     {
       remark: "Lotfddfasdtery",
-      amount: "10000",
-      date: "Jan 22, 2020, 09:24 PM",
+      amount: "700",
+      date: "Jan 22, 2025, 09:24 PM",
     },
     {
       remark: "Lofasdfttery",
       amount: "1000",
-      date: "Feb 29, 2022, 01:24 PM",
+      date: "Feb 29, 2025, 01:24 PM",
     },
   ],
 };
