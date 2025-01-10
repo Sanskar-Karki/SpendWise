@@ -5,27 +5,27 @@ const initialState = {
   incomeData: [
     {
       remark: "Salary",
-      amount: "9999",
+      amount: "99",
       date: "Jun 10, 2025, 09:25 PM",
     },
     {
       remark: "Bonus",
-      amount: "1000000",
+      amount: "700",
       date: "Jun 10, 2025, 09:26 PM",
     },
     {
       remark: "Tansport",
-      amount: "1000",
+      amount: "100",
       date: "April 12, 2025, 09:24 PM",
     },
     {
       remark: "Freelance Work",
-      amount: "5000",
+      amount: "350",
       date: "Jan 9, 2025, 03:24 PM",
     },
     {
       remark: "Bonus",
-      amount: "15000",
+      amount: "900",
       date: "Jan 8, 2025, 01:15 PM",
     },
     {

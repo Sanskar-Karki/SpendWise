@@ -4,6 +4,7 @@ import Motivation from "./components/Motivation";
 import Summary from "./components/Summary";
 import LatestData from "./components/LatestData";
 import "./styles.css";
+import ChartData from './components/ChartData';
 
 const Dashboard = () => {
   return (
@@ -20,7 +21,7 @@ const Dashboard = () => {
         animate={{ opacity: 1, y: 0 }} // Fade and slide up
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <Chart />
+        <ChartData />
       </motion.div>
 
       {/* Latest Income Section */}

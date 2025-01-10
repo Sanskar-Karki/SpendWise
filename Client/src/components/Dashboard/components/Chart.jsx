@@ -1,51 +1,111 @@
-import { LineChart, Line, ResponsiveContainer, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { LineChart, Line, ResponsiveContainer, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
 
-const financialData = [
-  { month: "January", income: 5000, expense: 2000 },
-  { month: "February", income: 4000, expense: 2500 },
-  { month: "March", income: 6000, expense: 3000 },
-  { month: "April", income: 7000, expense: 4000 },
-  { month: "May", income: 9000, expense: 4200 },
-  { month: "June", income: 7500, expense: 5000 },
-  { month: "July", income: 8500, expense: 500 },
-  { month: "August", income: 9000, expense: 7000 },
-  { month: "September", income: 9500, expense: 6500 },
-  { month: "October", income: 10000, expense: 7000 },
-  { month: "November", income: 11000, expense: 7500 },
-  { month: "December", income: 12000, expense: 4000 },
-];
+// Chart Component
+const Chart = ({ data }) => {
+  const [hoveredLine, setHoveredLine] = useState(null);
 
-const Chart = () => {
+  if (!data || data.length === 0) {
+    return (
+      <div className="relative w-full h-[520px] bg-white/10 backdrop-blur-md border border-white/20 rounded-xl flex items-center justify-center shadow-lg">
+        <div className="text-white/70 font-medium">No data available</div>
+      </div>
+    );
+  }
+
+  const handleMouseEnter = (line) => {
+    setHoveredLine(line);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredLine(null);
+  };
+
   return (
-    <div className="w-full h-[520px] bg-opacity-10 bg-white p-4 pb-16 rounded-xl">
-      <h2 className="text-center">
-        <span className="text-green-900 font-bold text-2xl">
-          Income{" "}
-        </span>
-        <span className="text-neutral-700 font-bold text-xl">
-          vs
-        </span>
-        <span className="text-red-900 font-bold text-2xl">
-          {" "}Expense
-        </span>
-      </h2>
-      <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={financialData} margin={{ top: 20, right: 50, left: 0, bottom: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="black" />
-          <Line type="monotone" dataKey="income" stroke="green" strokeWidth={2} />
-          <Line type="monotone" dataKey="expense" stroke="red" strokeWidth={2} />
 
-          <XAxis
-            dataKey="month"
-            stroke="#000"
-            tickFormatter={(month) => month.length > 6 ? `${month.slice(0, 3)}.` : month}
-            interval={0} /
-          >
+    <div className="relative w-full h-[520px] p-6 pb-16">
+      {/* Glassmorphic background */}
 
-          <YAxis stroke="#000" />
-          <Tooltip content={<CustomTooltip />} />
-        </LineChart>
-      </ResponsiveContainer>
+      <div className="absolute inset-0 bg-gradient-to-tr from-white/20 via-white/10 to-white/50 rounded-3xl shadow-2xl p-8 shadow-[0px_0px_50px_5px_rgba(255,255,255,0.4)] border-white/50 rounded-xl shadow-lg" />
+
+      {/* Content */}
+      <div className="relative">
+
+
+        <ResponsiveContainer width="100%" height={420}>
+          <LineChart data={data} margin={{ top: 20, right: 30, left: 10, bottom: 0 }}>
+            {/* Styled grid with black lines and a more visible middle line */}
+            <CartesianGrid
+              strokeDasharray="3 3"
+              stroke="rgba(0, 0, 0, 0.6)" // Darker black grid lines
+              vertical={false}
+            />
+
+            {/* Income Line */}
+            <Line
+              type="monotone"
+              dataKey="income"
+              stroke={hoveredLine === "income" ? "#2D9B5F" : "#33AC62"}  // Darker green on hover
+              strokeWidth={4}  // Increased line width
+              dot={{
+                fill: "#33AC62", // Green for dot color
+                r: 6,  // Larger dot size
+                strokeWidth: 2,
+                stroke: "#fff" // White stroke for better visibility
+              }}
+              activeDot={{
+                r: 8,
+                stroke: "white",
+                strokeWidth: 2
+              }}
+              onMouseEnter={() => handleMouseEnter("income")}
+              onMouseLeave={handleMouseLeave}
+            />
+
+            {/* Expense Line */}
+            <Line
+              type="monotone"
+              dataKey="expense"
+              stroke={hoveredLine === "expense" ? "#9B1D1D" : "#DC2626"}  // Darker red on hover
+              strokeWidth={4}  // Increased line width
+              dot={{
+                fill: "#f87171", // Red for dot color
+                r: 6,  // Larger dot size
+                strokeWidth: 2,
+                stroke: "#fff" // White stroke for better visibility
+              }}
+              activeDot={{
+                r: 8,
+                stroke: "white",
+                strokeWidth: 2
+              }}
+              onMouseEnter={() => handleMouseEnter("expense")}
+              onMouseLeave={handleMouseLeave}
+            />
+
+            {/* Styled axes with black text */}
+            <YAxis
+              stroke="rgba(0,0,0,0.8)" // Black color for Y-axis text
+              tickLine={{ stroke: "rgba(0,0,0,0.5)" }} // Darker tick lines
+              axisLine={{ stroke: "rgba(0,0,0,0.6)" }} // Darker axis line
+              tick={{ fill: 'rgba(0,0,0,0.8)', fontSize: 16 }} // Black color for tick labels
+              tickFormatter={(value) => value.toLocaleString()}
+            />
+            <XAxis
+              dataKey={data[0]?.date ? "date" : "month"}
+              stroke="rgba(0,0,0,0.8)" // Black color for X-axis text
+              tickLine={{ stroke: "rgba(0,0,0,0.5)" }} // Darker tick lines
+              axisLine={{ stroke: "rgba(0,0,0,0.6)" }} // Darker axis line
+              tickFormatter={(label) => label.length > 6 ? `${label.slice(0, 3)}.` : label}
+              interval={0}
+              tick={{ fill: 'rgba(0,0,0,0.8)', fontSize: 16 }} // Black color for tick labels
+            />
+
+            <Tooltip content={<CustomTooltip />} />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 };
@@ -53,19 +113,25 @@ const Chart = () => {
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-gray-800 p-2 rounded-md text-gray-100">
-        <p className="font-bold mb-2">{label}</p>
-        <p className="text-green-400">
-          Income: <span className="ml-2">NPR {payload[0].value}</span>
+      <div className="bg-gray-800/90 backdrop-blur-sm border border-white/40 p-3 rounded-lg shadow-xl">
+        <p className="font-semibold text-white/90 mb-2">{label}</p>
+        <p className="text-green-700 font-medium flex items-center justify-between">
+          Income:
+          <span className="ml-4 font-bold">
+            NPR {payload[0].value.toLocaleString()}
+          </span>
         </p>
-        <p className="text-red-400">
-          Expense: <span className="ml-2">NPR {payload[1].value}</span>
+        <p className="text-red-700 font-medium flex items-center justify-between">
+          Expense:
+          <span className="ml-4 font-bold">
+            NPR {payload[1].value.toLocaleString()}
+          </span>
         </p>
       </div>
     );
   }
-
   return null;
 };
 
+// ChartData Component
 export default Chart;
