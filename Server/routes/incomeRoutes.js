@@ -1,15 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const {
-  addIncomeDetails,
-  getAllIncomeDetails,
-  updateIncomeDetail,
-  deleteIncomeDetail,
+  addIncome,
+  getAllIncomes,
+  updateIncome,
+  deleteIncome,
 } = require("../controllers/incomeController");
 
-router.post("/", addIncomeDetails);
-router.get("/", getAllIncomeDetails);
-router.put("/:id", updateIncomeDetail);
-router.delete("/:id", deleteIncomeDetail);
+
+router.get("/", getAllIncomes);
+router.post("/", addIncome);
+router.delete("/delete/:id", deleteIncome);
+router.put("/update/:id", updateIncome)
 
 module.exports = router;
+

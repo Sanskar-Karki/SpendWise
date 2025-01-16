@@ -4,7 +4,7 @@ const Expense = require("../models/expenseModel");
 const addExpense = async (req, res) => {
   try {
     const { remark, amount, date } = req.body;
-    const newExpense = await Expense.create({ remark, amount, createdAt: date, updatedAt: date });
+    const newExpense = await Expense.create({ remark, amount, date });
     res.status(201).json(newExpense);
   } catch (error) {
     res.status(500).json({ message: "Error creating expense", error });
