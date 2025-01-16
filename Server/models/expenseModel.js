@@ -1,43 +1,32 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../connection/dbConnection");
-const Table = "Expense";
-const Expense = sequelize.define(Table, {
+
+const Expense = sequelize.define("Expense", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
-  description: {
+  remark: {
     type: DataTypes.STRING,
     allowNull: false,
   },
   amount: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.FLOAT,
     allowNull: false,
   },
-  userId: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: "Users",
-      key: "id",
-    },
+  date: {
+    type: DataTypes.DATE,
     allowNull: false,
   },
   createdAt: {
-    type: DataTypes.DATEONLY,
+    type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
   },
   updatedAt: {
-    type: DataTypes.DATEONLY,
+    type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
   },
 });
-
-Expense.associate = (models) => {
-  Expense.belongsTo(models.User, {
-    foreignKey: "userId",
-    as: "user",
-  });
-};
 
 module.exports = Expense;

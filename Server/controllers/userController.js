@@ -1,7 +1,7 @@
 const { ApiError } = require("../utils/ApiError");
 const { ApiResponse } = require("../utils/ApiResponse");
 const { asyncHandler } = require("../utils/asyncHandler");
-const User = require("../models/User");
+const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const { where } = require("sequelize");
 
