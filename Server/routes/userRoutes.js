@@ -4,7 +4,7 @@ const {
   loginUser,
   logoutUser,
   setMonthlyBudget,
-} = require("../controllers/user.controller");
+} = require("../controllers/userController");
 const { verifyJWT } = require("../middlewares/auth.middleware");
 
 const router = Router();

@@ -1,6 +1,7 @@
 const express = require("express");
-const userRoute = require("./routes/user.routes");
-const expenseRoute = require("./routes/expense.routes");
+const userRoute = require("./routes/userRoutes");
+const expenseRoute = require("./routes/expenseRoutes");
+const incomeRoute = require("./routes/incomeRoutes")
 
 const app = express();
 const db = require("./models/index");
@@ -12,5 +13,6 @@ app.use(cookieParser());
 
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/user-expense", expenseRoute);
+app.use("/api/v1/user-income", incomeRoute);
 
 module.exports = app;

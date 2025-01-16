@@ -1,7 +1,13 @@
 const sequelize = require("../connection/dbConnection");
-const User = require("../models/User");
-const Expense = require("../models/Expense");
+const User = require("./userModel");
+const Expense = require("./expenseModel");
+const Income = require("./incomeModel");
 const db = {};
+
+// Add models to the db object
+db.User = User;
+db.Expense = Expense;
+db.Income = Income;
 
 sequelize
   .authenticate()
@@ -11,6 +17,7 @@ sequelize
   .catch((err) => {
     console.log("Unable to connect to database", err);
   });
+
 Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
@@ -25,5 +32,6 @@ sequelize
   .catch((err) => {
     console.log("Unable to sync database", err);
   });
+
 db.sequelize = sequelize;
 module.exports = db;
