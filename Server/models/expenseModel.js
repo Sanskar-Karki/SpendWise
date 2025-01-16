@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../connection/dbConnection");
+
 const Table = "Expense";
 const Expense = sequelize.define(Table, {
   id: {
@@ -28,5 +29,6 @@ const Expense = sequelize.define(Table, {
     defaultValue: DataTypes.NOW,
   },
 });
+
 
 module.exports = Expense;

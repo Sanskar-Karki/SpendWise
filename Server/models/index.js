@@ -9,6 +9,12 @@ db.User = User;
 db.Expense = Expense;
 db.Income = Income;
 
+// Define associations here
+User.hasMany(Income, { foreignKey: 'userId' });
+User.hasMany(Expense, { foreignKey: 'userId' });
+Income.belongsTo(User, { foreignKey: 'userId' });
+Expense.belongsTo(User, { foreignKey: 'userId' });
+
 sequelize
   .authenticate()
   .then(() => {
@@ -17,12 +23,6 @@ sequelize
   .catch((err) => {
     console.log("Unable to connect to database", err);
   });
-
-Object.keys(db).forEach((modelName) => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
-});
 
 sequelize
   .sync({ force: false })

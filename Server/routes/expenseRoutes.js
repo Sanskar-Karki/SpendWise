@@ -1,3 +1,4 @@
+const { verifyJWT } = require("../middlewares/authMiddleware")
 const { Router } = require("express");
 const {
   addExpense,
@@ -8,10 +9,12 @@ const {
 
 const router = Router();
 
+router.route("/")
+  .get(verifyJWT, getAllExpenses)
+  .post(verifyJWT, addExpense);
 
-router.post("/", addExpense);
-router.put("/update/:id", updateExpense);
-router.delete("/delete/:id", deleteExpense);
-router.get("/", getAllExpenses);
+router.route("/:id")
+  .put(verifyJWT, updateExpense)
+  .delete(verifyJWT, deleteExpense);
 
 module.exports = router;
