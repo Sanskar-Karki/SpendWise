@@ -1,6 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+* {
+  font-family: "Fira Mono", serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* If you want a different font for headings, you can set that here */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lato', sans-serif; /* Use Lato for headings */
+}
 :root {
   --color-light: #f9f7f7;
   --color-ternary: #dbe2ef;

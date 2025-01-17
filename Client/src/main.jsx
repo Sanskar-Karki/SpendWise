@@ -11,11 +11,13 @@ import Income from "./components/Income/Income";
 import Expense from "./components/Expense/Expense";
 import Dashboard from "./components/Dashboard/Dashboard";
 import NotFound from "./NotFound";
+import Login from "./components/Auth/LoginPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route index element={<Dashboard />} />
+      <Route index element={<Login />} />
+      <Route path="dashboard" element={<Dashboard />} />
       <Route path="income" element={<Income />} />
       <Route path="expense" element={<Expense />} />
       <Route path="*" element={<NotFound />} />

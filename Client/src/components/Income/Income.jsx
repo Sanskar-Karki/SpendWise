@@ -156,11 +156,11 @@ const Income = () => {
   };
 
   return (
-    <div className="min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="min-h-screen pt-16">
+      <div className="max-w-7xl  mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Add animation to the form */}
         <motion.div
-          className="backdrop-blur-lg bg-gradient-to-tr from-white/40 via-white/30 to-white/10 rounded-3xl shadow-2xl p-8 border border-white/50 hover:shadow-3xl transition-shadow duration-500"
+          className="transition-  backdrop-blur-lg bg-gradient-to-tr from-white/40 via-white/30 to-white/10 rounded-3xl shadow-2xl p-8 border border-white/50 hover:shadow-3xl transition-shadow duration-500"
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           whileHover={{ scale: 1.02, boxShadow: "-10px 10px 200px rgba(50, 205, 50, 0.4)" }}
@@ -172,14 +172,14 @@ const Income = () => {
           <form onSubmit={handleSubmit} className="space-y-8">
             <div className="grid md:grid-cols-3 gap-8">
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700/90">Description</label>
+                <label className="block text-sm font-medium text-gray-700/90">Remark</label>
                 <input
                   name="remark"
                   value={data.remark}
                   onChange={handleInput}
-                  className="w-full px-4 py-3 rounded-xl backdrop-blur-sm bg-white/40 border border-white/60 
-                           focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition-all duration-300
-                           placeholder-gray-400"
+                  className="w-full px-4 py-3 rounded-xl backdrop-blur-sm bg-white/40 
+             focus:ring-2 focus:ring-green-600 focus:border-transparent focus:outline-none 
+             transition-all duration-500 placeholder-gray-400"
                   placeholder="What is this income for?"
                   type="text"
                 />
@@ -191,9 +191,9 @@ const Income = () => {
                   name="amount"
                   value={data.amount}
                   onChange={handleInput}
-                  className="w-full px-4 py-3 rounded-xl backdrop-blur-sm bg-white/40 border border-white/60 
-                           focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition-all duration-300
-                           placeholder-gray-400"
+                  className="w-full px-4 py-3 rounded-xl backdrop-blur-sm bg-white/40 
+             focus:ring-2 focus:ring-green-600 focus:border-transparent focus:outline-none 
+             transition-all duration-500 placeholder-gray-400"
                   placeholder="0.00"
                   type="number"
                 />
@@ -206,8 +206,9 @@ const Income = () => {
                   onChange={handleInput}
                   name="date"
                   disabled={!isDateEditable}
-                  className="w-full px-4 py-3 rounded-xl backdrop-blur-sm bg-white/40 border border-white/60 
-                           focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition-all duration-300"
+                  className="w-full px-4 py-3 rounded-xl backdrop-blur-sm bg-white/40 
+             focus:ring-2 focus:ring-green-600 focus:border-transparent focus:outline-none 
+             transition-all duration-500 placeholder-gray-400"
                   type="datetime-local"
                 />
               </div>
@@ -226,7 +227,7 @@ const Income = () => {
                 </button>
               )}
 
-              <button className="px-8 py-4 sm:px-12 sm:py-5 text-xs  sm:rounded-xl sm:text-sm uppercase font-semibold text-white bg-green-600 border-none rounded-2xl 
+              <button className="px-8 py-4 sm:px-10 sm:py-4 text-xs  sm:rounded-xl sm:text-lg uppercase font-semibold text-white bg-green-600 border-none rounded-2xl 
             shadow-md transition-all duration-300 ease-in-out cursor-pointer outline-none 
             hover:bg-green-500 hover:shadow-lg hover:text-white hover:translate-y-[-4px]
             active:translate-y-[-1px] w-full sm:w-auto">

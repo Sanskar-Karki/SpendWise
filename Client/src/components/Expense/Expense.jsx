@@ -158,7 +158,7 @@ const Expense = () => {
 
   return (
     <div className="min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-24">
         {/* Animate the form with motion.div */}
         <motion.div
           className="backdrop-blur-lg bg-gradient-to-tr from-white/40 via-white/30 to-white/10 rounded-3xl shadow-2xl p-8 border border-white/50 hover:shadow-3xl transition-shadow duration-500"
@@ -178,9 +178,9 @@ const Expense = () => {
                   name="remark"
                   value={data.remark}
                   onChange={handleInput}
-                  className="w-full px-4 py-3 rounded-xl backdrop-blur-sm bg-white/40 border border-white/60 
-                           focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition-all duration-300
-                           placeholder-gray-400"
+                  className="w-full px-4 py-3 rounded-xl backdrop-blur-sm bg-white/40 
+             focus:ring-2 focus:ring-red-600 focus:border-transparent focus:outline-none 
+             transition-all duration-500 placeholder-gray-400"
                   placeholder="What's this expense for?"
                   type="text"
                 />
@@ -192,9 +192,9 @@ const Expense = () => {
                   name="amount"
                   value={data.amount}
                   onChange={handleInput}
-                  className="w-full px-4 py-3 rounded-xl backdrop-blur-sm bg-white/40 border border-white/60 
-                           focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition-all duration-300
-                           placeholder-gray-400"
+                  className="w-full px-4 py-3 rounded-xl backdrop-blur-sm bg-white/40 
+             focus:ring-2 focus:ring-red-600 focus:border-transparent focus:outline-none 
+             transition-all duration-500 placeholder-gray-400"
                   placeholder="0.00"
                   type="number"
                 />
@@ -207,8 +207,9 @@ const Expense = () => {
                   onChange={handleInput}
                   name="date"
                   disabled={!isDateEditable}
-                  className="w-full px-4 py-3 rounded-xl backdrop-blur-sm bg-white/40 border border-white/60 
-                           focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition-all duration-300"
+                  className="w-full px-4 py-3 rounded-xl backdrop-blur-sm bg-white/40 
+             focus:ring-2 focus:ring-red-600 focus:border-transparent focus:outline-none 
+             transition-all duration-500 placeholder-gray-400"
                   type="datetime-local"
                 />
               </div>
@@ -230,7 +231,7 @@ const Expense = () => {
               )}
 
               <button
-                className="px-8 py-4 sm:px-12 sm:py-5 text-xs  sm:rounded-xl sm:text-sm uppercase font-semibold text-white bg-red-600 border-none rounded-2xl 
+                className="px-8 py-4 sm:px-10 sm:py-4  text-xs  sm:rounded-xl sm:text-lg uppercase font-semibold text-white bg-red-600 border-none rounded-2xl 
             shadow-md transition-all duration-300 ease-in-out cursor-pointer outline-none 
             hover:bg-red-500 hover:shadow-lg hover:text-white hover:translate-y-[-4px]
             active:translate-y-[-1px] w-full sm:w-auto"

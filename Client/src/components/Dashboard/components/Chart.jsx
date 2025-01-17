@@ -113,15 +113,15 @@ const Chart = ({ data }) => {
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-gray-800/90 backdrop-blur-sm border border-white/40 p-3 rounded-lg shadow-xl">
-        <p className="font-semibold text-white/90 mb-2">{label}</p>
-        <p className="text-green-700 font-medium flex items-center justify-between">
+      <div className="bg-blue-900/40 backdrop-blur-3xl p-3 rounded-lg shadow-xl">
+        <p className="font-semibold text-white/80 mb-2">{label}</p>
+        <p className="text-green-800 font-medium flex items-center justify-between">
           Income:
           <span className="ml-4 font-bold">
             NPR {payload[0].value.toLocaleString()}
           </span>
         </p>
-        <p className="text-red-700 font-medium flex items-center justify-between">
+        <p className="text-red-800 font-medium flex items-center justify-between">
           Expense:
           <span className="ml-4 font-bold">
             NPR {payload[1].value.toLocaleString()}
