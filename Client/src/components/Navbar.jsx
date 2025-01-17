@@ -17,16 +17,13 @@ const Navbar = () => {
   // Function to check if the current path matches the link
   const getLinkClass = (path) => {
     return location.pathname === path
-      ? "rounded-md px-3 py-2 text-sm font-medium text-black bg-purple-100 transition-all duration-500 transform hover:scale-105" // Active link styles with smooth transition
-      : "rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-purple-200 hover:text-black transition-all duration-500 transform hover:scale-105 "; // Default link styles with hover effects and focus styling
+      ? "rounded-md px-8 py-2 font-bold text-glow text-black bg-purple-200 bg-opacity-80 transition-color duration-1000 transform hover:scale-105 shadow-inner  shadow-[inset_0px_0px_10px_rgba(0,0,0,0.3),_inset_0px_10px_100px_rgba(255,255,255,0.3)]"
+      : "rounded-md px-3 py-2 text-sm font-medium hover:bg-purple-200 hover:text-black transition-all duration-500 transform hover:scale-105";
   };
 
 
-
-
-
   return (
-    <nav className="sticky top-0 left-0 w-full z-50 backdrop-blur-sm  shadow-lg">
+    <nav className="fixed  top-0 left-0 w-full z-50 backdrop-blur-sm  shadow-lg">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 ">
         <div className="relative flex h-16 items-center justify-between">
           {/* Mobile menu button - Only visible on small screens */}
@@ -75,8 +72,10 @@ const Navbar = () => {
           <div className="flex flex-1 items-center justify-between">
             {/* Logo/Title - Left on desktop */}
             <div className="flex-shrink-0">
-              <Link to="/">
-                <h1 className="text-3xl text-[#0d1014] font-bold">SpendWise</h1>
+              <Link to="/dashboard">
+                <div className="w-1/3 ">
+                  <img src="../../../public/logo-black.png" alt="SpendWise" />
+                </div>
               </Link>
             </div>
 
@@ -84,21 +83,21 @@ const Navbar = () => {
             <div className="hidden sm:block flex-1">
               <div className="flex  justify-center space-x-4">
                 <Link
-                  to="/"
-                  className={`rounded-md px-3 py-2 text-sm font-medium sm:text-black ${getLinkClass("/")}`}
+                  to="/dashboard"
+                  className={`  rounded-md px-3 py-2 text-sm font-medium text-black ${getLinkClass("/dashboard")}`}
                   aria-current="page"
                 >
                   Dashboard
                 </Link>
                 <Link
                   to="/income"
-                  className={`rounded-md px-3 py-2 text-sm font-medium sm:text-black ${getLinkClass("/income")}`}
+                  className={` rounded-md px-3 py-2 text-sm  font-medium text-black ${getLinkClass("/income")}`}
                 >
                   Income
                 </Link>
                 <Link
                   to="/expense"
-                  className={`rounded-md px-3 py-2 text-sm font-medium sm:text-black ${getLinkClass("/expense")}`}
+                  className={`rounded-md px-3 py-2 text-sm font-medium text-black ${getLinkClass("/expense")}`}
                 >
                   Expense
                 </Link>
@@ -160,7 +159,7 @@ const Navbar = () => {
         <div className="sm:hidden" id="mobile-menu">
           <div className="space-y-1 px-2 pb-3 pt-2">
             <Link
-              to="/"
+              to="/dashobard"
               className="block rounded-md px-3 py-2 text-base font-medium text-black hover:bg-[#DBE2EF] hover:text-black"
             >
               Dashboard
