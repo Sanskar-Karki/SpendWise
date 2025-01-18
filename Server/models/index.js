@@ -10,10 +10,10 @@ db.Expense = Expense;
 db.Income = Income;
 
 // Define associations here
-User.hasMany(Income, { foreignKey: 'userId' });
-User.hasMany(Expense, { foreignKey: 'userId' });
-Income.belongsTo(User, { foreignKey: 'userId' });
-Expense.belongsTo(User, { foreignKey: 'userId' });
+User.hasMany(Income, { foreignKey: 'userId', onDelete: 'CASCADE' });
+User.hasMany(Expense, { foreignKey: 'userId', onDelete: 'CASCADE' });
+Income.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
+Expense.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
 
 sequelize
   .authenticate()

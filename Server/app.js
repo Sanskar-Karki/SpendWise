@@ -4,7 +4,7 @@ const expenseRoute = require("./routes/expenseRoutes");
 const incomeRoute = require("./routes/incomeRoutes")
 
 const app = express();
-const db = require("./models/index");
+require("./models/index");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

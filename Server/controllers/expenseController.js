@@ -1,3 +1,4 @@
+const User = require("../models/expenseModel")
 const Expense = require("../models/expenseModel");
 
 // Create a new expense entry
@@ -14,7 +15,11 @@ const addExpense = async (req, res) => {
 // Get all expense entries
 const getAllExpenses = async (req, res) => {
   try {
-    const expenses = await Expense.findAll();
+    const expenses = await Expense.findAll({
+      include: {
+        model: User,
+      }
+    });
     res.status(200).json(expenses);
   } catch (error) {
     res.status(500).json({ message: "Error fetching expenses", error });

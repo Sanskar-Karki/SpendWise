@@ -1,4 +1,5 @@
 const Income = require("../models/incomeModel");
+const User = require("../models/userModel");
 const { updateExpense } = require("./expenseController");
 
 // Create a new income entry
@@ -15,7 +16,11 @@ const addIncome = async (req, res) => {
 // Get all income entries
 const getAllIncomes = async (req, res) => {
   try {
-    const incomes = await Income.findAll();
+    const incomes = await Income.findAll({
+      include: {
+        model: User
+      }
+    });
     res.status(200).json(incomes);
   } catch (error) {
     res.status(500).json({ message: "Error fetching incomes", error });
