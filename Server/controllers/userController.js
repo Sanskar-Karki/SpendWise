@@ -43,8 +43,10 @@ const loginUser = async (req, res) => {
 }
 
 const logoutUser = async (req, res) => {
-  console.log("just remove token from the cookie or session id from the server");
-  // TODO: Write the logic inorder to remove the token id and session id
+  res.clearCookie("auth", {
+    path: '/',
+  });
+  res.render("/auth/user/login")
 }
 
 
