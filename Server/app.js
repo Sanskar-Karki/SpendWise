@@ -1,10 +1,14 @@
 const express = require("express");
+const session = require("express-session");
+const sessionConfig = require("./config/sessionConfig.js");
 const userRoute = require("./routes/userRoutes");
 const expenseRoute = require("./routes/expenseRoutes");
-const incomeRoute = require("./routes/incomeRoutes")
+const incomeRoute = require("./routes/incomeRoutes");
 
 const app = express();
 require("./models/index");
+
+app.use(session(sessionConfig));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
