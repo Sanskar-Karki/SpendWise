@@ -43,10 +43,22 @@ const loginUser = async (req, res) => {
 }
 
 const logoutUser = async (req, res) => {
-  res.clearCookie("auth", {
-    path: '/',
-  });
-  res.render("/auth/user/login")
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.clearCookie("auth", {
+      path: "/",
+    })
+
+    req.session = null;
+
+    res.clearCokkie("connect.sid", {
+      path: '/',
+    });
+
+    res.redirect("/auth/user/login");
+  })
 }
 
 
