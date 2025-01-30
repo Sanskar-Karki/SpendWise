@@ -1,7 +1,11 @@
-require("dotenv").config();
+const dotenv = require("dotenv");
 
-export const sessionConfig = {
+dotenv.config();
+
+const sessionConfig = {
   secret: process.env.EXPRESS_SESSION_SECRET,
   resave: false,
   cookie: { secure: true },
 };
+
+module.exports = sessionConfig;
