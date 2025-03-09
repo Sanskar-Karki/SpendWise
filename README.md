@@ -57,8 +57,6 @@ Spendwise is a user-friendly expense tracker designed to help you manage your fi
 
 ![Latest Datas]![image](https://github.com/user-attachments/assets/ace99460-7675-4893-8876-f1eb76b0dc0d)
 
-
-
 ---
 
 ## 📌 Future Enhancements
