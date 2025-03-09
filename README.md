@@ -11,8 +11,7 @@ Spendwise is a user-friendly expense tracker designed to help you manage your fi
 ## 📌 Features
 
 👉 **Add Expenses:** Log your expenses with customizable categories and notes.  
-👉 **Categorize Expenses:** Group expenses into categories for better organization.  
-👉 **Track Spending:** View your expenses and spending habits over time.  
+👉 **Track Spending:** View your expenses and spending habits over time with visual charts that display weekly, yearly spending trends, and category breakdowns.  
 👉 **Manage Budgets:** Set budgets for various categories and track your progress.  
 👉 **Search and Filter:** Easily find specific expenses based on categories, dates, or amount.
 
@@ -51,12 +50,16 @@ Spendwise is a user-friendly expense tracker designed to help you manage your fi
 ---
 
 ## 📸 Screenshots  
-<!-- Add screenshots here -->
 
-![Dashboard](https://via.placeholder.com/500x300)
-![Add Expense](https://via.placeholder.com/500x300)
-![Manage Categories](https://via.placeholder.com/500x300)
-![Set Budget](https://via.placeholder.com/500x300)
+![Dashboard]![image](https://github.com/user-attachments/assets/a7140242-ac45-41f3-bc4e-ad8aa3c401e9)
+
+![Add Income]![image](https://github.com/user-attachments/assets/8d85296c-116b-4e6b-9dbd-afb6a5e7bb62)
+
+![Add Expense]![image](https://github.com/user-attachments/assets/7e022872-3e23-4043-8875-0fa2061ddf12)
+
+![Latest Datas]![image](https://github.com/user-attachments/assets/ace99460-7675-4893-8876-f1eb76b0dc0d)
+
+
 
 ---
 
@@ -76,6 +79,3 @@ Contributions are welcome! To contribute:
 4. Open a pull request  
 
 Give this repo a ⭐ if you found it useful! 🚀
-```
-
-This README mirrors the structure of the **Lift Log NP** example, with all the sections included to make your **Spendwise** project clear and engaging for potential users and contributors. Replace the placeholder links for screenshots and the live demo with the actual links once ready.
