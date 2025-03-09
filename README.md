@@ -6,7 +6,6 @@ Here’s a **Spendwise** README formatted similarly to your **Lift Log NP** exam
 Spendwise is a user-friendly expense tracker designed to help you manage your finances, monitor daily expenses, set budgets, and track your spending patterns.
 
 
-
 ## 📌 Features
 
 👉 **Add Expenses:** Log your expenses with customizable categories and notes.  
